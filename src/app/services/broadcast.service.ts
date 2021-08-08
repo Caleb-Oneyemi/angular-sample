@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { map, filter } from "rxjs/operators";
+import { map, filter } from 'rxjs/operators';
 
 export interface IBroadcastEvent {
   key: EventKeys;
@@ -17,16 +17,16 @@ export enum EventKeys {
   providedIn: 'root',
 })
 export class BroadcastService {
-  private _eventBus = new Subject<IBroadcastEvent>();
+  private eventBus = new Subject<IBroadcastEvent>();
 
   on(key: EventKeys): Observable<string> {
-    return this._eventBus.asObservable().pipe(
-      filter((event: any) => event.key === key || event.key === EventKeys.ALL),
-      map((event: any) => event.data)
+    return this.eventBus.asObservable().pipe(
+      filter((event) => event.key === key || event.key === EventKeys.ALL),
+      map((event) => event.data)
     );
   }
 
   broadcast(key: EventKeys, data: string) {
-    this._eventBus.next({ key, data });
+    this.eventBus.next({ key, data });
   }
 }

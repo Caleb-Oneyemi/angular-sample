@@ -14,7 +14,7 @@ export class AppComponent {
   @ViewChild('sidenav') sidenav: MatSidenav | null = null;
 
   constructor(broadCastService: BroadcastService) {
-    _.bindAll(this, 'onLoginClicked');
+    _.bindAll(this, 'onLoginClicked', 'onLoginEvent');
     broadCastService
       .on(EventKeys.LOGIN_BUTTON_CLICKED)
       .subscribe(this.onLoginClicked);

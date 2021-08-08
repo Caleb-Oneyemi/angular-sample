@@ -50,8 +50,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(`onSubmit: username : ${this.loginForm?.value.username}`);
-    console.log(`onSubmit: password : ${this.loginForm?.value.password}`);
     this.broadcastService.broadcast(
       EventKeys.USER_LOGIN_EVENT,
       this.loginForm?.value.username

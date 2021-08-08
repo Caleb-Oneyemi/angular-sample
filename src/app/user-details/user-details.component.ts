@@ -8,7 +8,7 @@ import { BroadcastService, EventKeys } from '../services/broadcast.service';
   styleUrls: ['./user-details.component.scss'],
 })
 export class UserDetailsComponent implements OnInit {
-  loggedInUserName: string = 'logged_in_user';
+  loggedInUserName: string = '';
   isLoggedIn: boolean = false;
 
   constructor(private broadcastService: BroadcastService) {
@@ -23,19 +23,18 @@ export class UserDetailsComponent implements OnInit {
   @Output() notify = new EventEmitter();
 
   onLoginClicked() {
-    this.notify.emit('UserDetailsComponent Emitted value');
+    this.notify.emit('UserDetailsComponent : emit value');
     this.broadcastService.broadcast(
       EventKeys.LOGIN_BUTTON_CLICKED,
-      'UserDetailsComponent:  LOGIN_BUTTON_CLICKED'
+      'UserDetailsComponent: broadcast : LOGIN_BUTTON_CLICKED'
     );
   }
 
   loginSuccessful(event: any): void {
-    console.log(`UserDetailsComponent.loginSuccessful : ${event}`);
     this.loggedInUserName = event;
     this.isLoggedIn = true;
   }
-  
+
   onLogoutClicked(): void {
     this.loggedInUserName = '';
     this.isLoggedIn = false;
